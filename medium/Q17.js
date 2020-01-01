@@ -8,6 +8,7 @@
 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 */
 
+//方法一
 var letterCombinations = function(digits) {
     var map = {
         2 : "abc",
@@ -37,5 +38,40 @@ var letterCombinations = function(digits) {
         }
         res = list;
     }
+    return res;
+};
+
+//方法二：回溯
+var letterCombinations = function(digits) {
+    var map = {
+        2 : "abc",
+        3 : "def",
+        4 : "ghi",
+        5 : "jkl",
+        6 : "mno",
+        7 : "pqrs",
+        8 : "tuv",
+        9 : "wxyz"
+    }
+    if(digits.length === 0){
+        return [];
+    }
+    //特殊情况 --- 只输入一个键
+    if(digits.length === 1){
+        return map[digits[0]].split('');
+    }
+    var res = [];
+    var len = digits.length;
+    function iter(index,str){
+        if(index == len){
+            res.push(str);
+            return;
+        }
+        var temp = map[digits[index]];
+        for(let i = 0; i < temp.length; i ++){
+            iter(index + 1,str + temp[i]);
+        }
+    }
+    iter(0,"");
     return res;
 };
