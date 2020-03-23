@@ -46,3 +46,25 @@ var selecSort = function(nums){
         }
     }
 }
+
+//方法三：插入排序 --- 抽出一张往前面有序的地方插入
+var sortArray = function(nums) {
+    //插入排序 --- 抽出一张往前面有序的地方插入
+    insertSort(nums);
+    return nums;
+};
+
+var insertSort = function(arr){
+    for(let i = 0; i < arr.length; i ++){
+        let temp = arr[i];
+        //把i左边的排好序，前面都是有序数列,大于前一个数肯定比前面所有数都大,否则的话把这个数拿出来也就是赋值给temp
+        let j = i - 1;
+        while(j >= 0 && arr[j] > temp){
+            //依次与前面的数比较,如果比前一个数小就让前一个数往后挪一位直到找到比temp小的位置放进去
+            arr[j + 1] = arr[j];
+            j --;
+        }
+        arr[j + 1] = temp;
+    }
+}
+
