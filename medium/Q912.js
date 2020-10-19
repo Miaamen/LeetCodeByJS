@@ -68,3 +68,19 @@ var insertSort = function(arr){
     }
 }
 
+// 方法四：桶排序
+var sortArray = function(nums) {
+    let arr = new Array(100000).fill(0)
+    nums.forEach(val => {
+        arr[50000 + val] ++;
+    })
+    nums = []
+    arr.forEach((val, index) => {
+        if(val) {
+            for(let i = 0; i < val; i ++) {
+                nums.push(index - 50000);
+            }
+        }
+    })
+    return nums
+};
